@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1d4ed8" />
+    <meta
+      name="description"
+      content="ScheduleCraft is a free online timetable generator. Create academic or personal timetables randomly or manually, then export to CSV, Excel, PDF, PNG or JPEG."
+    />
+    <title>ScheduleCraft — Online Timetable Generator</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Export libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- ===================== Navbar ===================== -->
+    <header class="navbar">
+      <div class="container">
+        <button class="brand" data-nav="home">
+          <span class="logo">SC</span>
+         <i class="fas fa-calendar-alt"></i> ScheduleCraft
+        </button>
+        <nav class="nav-links">
+          <!-- guest -->
+          <span data-auth="guest" class="nav-user">
+            <button class="nav-link nav-extra" data-nav="home"> <i class="fas fa-home"></i> Home</button>
+            <button class="btn btn-ghost btn-sm" data-open-auth="login"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button class="btn btn-sm" data-open-auth="signup"><i class="fas fa-user-plus"></i> Sign up</button>
+          </span>
+          <!-- logged in -->
+          <span data-auth="user" class="nav-user hidden">
+            <button class="nav-link" data-nav="create"> <i class="fas fa-plus"></i> Create</button>
+            <button class="nav-link" data-nav="history"> <i class="fas fa-history"></i> History</button>
+            <span class="avatar" data-user-initial>U</span>
+            <button class="btn btn-ghost btn-sm" data-action="logout"> <i class="fas fa-sign-out-alt"></i> Logout</button>
+          </span>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ===================== HOME VIEW ===================== -->
+    <section class="view active" id="view-home">
+      <!-- Hero -->
+      <div class="hero">
+        <div class="container grid hero-grid">
+          <div>
+            <span class="eyebrow">Free online timetable generator</span>
+            <h1>Build the perfect <span>timetable</span> in minutes.</h1>
+            <p class="lead">
+              ScheduleCraft helps you create <strong>academic</strong> and
+              <strong>personal</strong> timetables — either generated randomly or
+              built your own way. Then export them as CSV, Excel, PDF, PNG or JPEG.
+            </p>
+            <div class="hero-actions">
+              <button class="btn" data-open-auth="signup">Get started — it's free</button>
+              <button class="btn btn-outline" data-open-auth="login">I already have an account</button>
+            </div>
+          </div>
+          <div class="hero-card" aria-hidden="true">
+            <table class="mini-table">
+              <thead>
+                <tr><th>Time</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="slot">9:00</td><td>Maths</td><td>Physics</td><td>CS</td><td>Maths</td><td>English</td></tr>
+                <tr><td class="slot">10:00</td><td>CS Lab</td><td>Maths</td><td>English</td><td>Physics</td><td>CS</td></tr>
+                <tr><td class="slot">11:00</td><td>English</td><td>CS</td><td>Physics</td><td>CS Lab</td><td>Maths</td></tr>
+                <tr><td class="slot">12:00</td><td>Physics</td><td>English</td><td>Maths</td><td>CS</td><td>Physics</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="section" id="features">
+        <div class="container">
+          <div class="section-head">
+            <h2>Everything you need to plan your week</h2>
+            <p>Two timetable types, two generation modes, and five export formats.</p>
+          </div>
+          <div class="grid features-grid">
+            <article class="card"><div class="icon"><i class="fas fa-graduation-cap"></i></div><h3>Academic &amp; Personal</h3><p>Choose an academic timetable for classes and labs, or a personal one for routines, work and habits.</p></article>
+            <article class="card"><div class="icon"><i class="fas fa-dice"></i></div><h3>Random Generator</h3><p>Feed in your subjects and days — ScheduleCraft shuffles them into a balanced, ready-to-use timetable.</p></article>
+            <article class="card"><div class="icon"><i class="fas fa-pencil-alt"></i></div><h3>Build Your Own</h3><p>Prefer full control? Manually place each subject into the exact slot you want.</p></article>
+            <article class="card"><div class="icon"><i class="fas fa-download"></i></div><h3>5 Export Formats</h3><p>Download your timetable as CSV, Excel, PDF, PNG or JPEG with a single click.</p></article>
+            <article class="card"><div class="icon"><i class="fas fa-history"></i></div><h3>History &amp; Downloads</h3><p>Every timetable you create is saved so you can revisit, re-export or delete it later.</p></article>
+            <article class="card"><div class="icon"><i class="fas fa-lock"></i></div><h3>Personal Accounts</h3><p>Sign up to keep your timetables organised under your own account.</p></article>
+          </div>
+        </div>
+      </div>
+
+      <!-- How it works -->
+      <div class="section" id="how" style="background: var(--blue-50)">
+        <div class="container">
+          <div class="section-head">
+            <h2>How it works</h2>
+            <p>From sign up to export in four simple steps.</p>
+          </div>
+          <div class="grid steps-grid">
+            <div class="step"><div class="num">1</div><h4>Create account</h4><p>Sign up or log in to access your dashboard.</p></div>
+            <div class="step"><div class="num">2</div><h4>Pick a type</h4><p>Academic or personal — your choice.</p></div>
+            <div class="step"><div class="num">3</div><h4>Generate</h4><p>Random shuffle or build it manually.</p></div>
+            <div class="step"><div class="num">4</div><h4>Export</h4><p>Download in any of five formats.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Future scope -->
+      <div class="section" id="future">
+        <div class="container">
+          <div class="future">
+            <span class="badge">Roadmap</span>
+            <h2>Future scope</h2>
+            <p class="sub">ScheduleCraft is a learning project. Here's what's planned next:</p>
+            <div class="grid future-grid">
+              <div class="future-item"><h4> <i class="fas fa-server"></i> Real backend</h4><p>Move from local storage to a Node.js + database backend so timetables sync across devices.</p></div>
+              <div class="future-item"><h4> <i class="fas fa-share-alt"></i> Sharing</h4><p>Share timetables with classmates via a public link.</p></div>
+              <div class="future-item"><h4> <i class="fas fa-bell"></i> Reminders</h4><p>Email / push notifications before each scheduled slot.</p></div>
+              <div class="future-item"><h4> <i class="fas fa-cogs"></i> Smart conflicts</h4><p>Auto-detect clashes and suggest free slots.</p></div>
+              <div class="future-item"><h4> <i class="fas fa-mobile-alt"></i> Mobile app</h4><p>A companion app for Android and iOS.</p></div>
+              <div class="future-item"><h4> <i class="fas fa-moon"></i> Themes</h4><p>Dark mode and custom colour palettes.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CREATE VIEW ===================== -->
+    <section class="view" id="view-create">
+      <main class="page">
+        <div class="page-head">
+          <div class="container">
+            <h1>Create a timetable</h1>
+            <p>Welcome, <strong data-user-name>there</strong>. Choose a type and how you'd like to build it.</p>
+          </div>
+        </div>
+
+        <div class="container" style="padding-top: 28px; padding-bottom: 56px">
+          <!-- STEP 1: type -->
+          <h2 style="color: var(--blue-900); font-size: 1.15rem; margin-bottom: 14px">1 · Choose timetable type</h2>
+          <div class="grid type-grid">
+            <div class="type-card" data-type="academic">
+              <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+              <h3>Academic Timetable</h3>
+              <p>Classes, lectures and labs across the days of the week.</p>
+            </div>
+            <div class="type-card" data-type="personal">
+              <div class="icon"><i class="fas fa-user"></i></div>
+              <h3>Personal Timetable</h3>
+              <p>Daily routines, work blocks, gym, study and personal tasks.</p>
+            </div>
+          </div>
+
+          <!-- STEP 2: mode + details -->
+          <div id="builder" class="hidden">
+            <h2 style="color: var(--blue-900); font-size: 1.15rem; margin: 8px 0 14px">2 · How would you like to build it?</h2>
+            <div class="mode-toggle">
+              <button id="modeRandom" class="active"><i class="fas fa-dice"></i> Random generator</button>
+              <button id="modeManual"><i class="fas fa-edit"></i> Build your own</button>
+            </div>
+
+            <div class="panel">
+              <h2 id="panelTitle">Timetable details</h2>
+              <p class="hint" id="panelHint">Fill in the details below — required for both modes.</p>
+
+              <div class="form-row">
+                <div class="field">
+                  <label for="ttName">Timetable name</label>
+                  <input type="text" id="ttName" placeholder="e.g. Semester 1 Schedule" />
+                </div>
+                <div class="field">
+                  <label for="ttStart">Start time</label>
+                  <input type="time" id="ttStart" value="09:00" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="field">
+                  <label for="ttPeriod">Slot length (minutes)</label>
+                  <select id="ttPeriod">
+                    <option value="30">30 min</option>
+                    <option value="45">45 min</option>
+                    <option value="60" selected>60 min</option>
+                    <option value="90">90 min</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="ttSlots">Number of slots / day</label>
+                  <select id="ttSlots">
+                    <option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Days to include</label>
+                <div id="daysWrap" style="display:flex;flex-wrap:wrap;gap:14px;padding-top:4px"></div>
+              </div>
+
+              <div class="field">
+                <label id="itemsLabel">Subjects</label>
+                <div class="subjects-list" id="subjectsList"></div>
+                <div class="add-subject">
+                  <input type="text" id="subjectInput" placeholder="Add a subject and press Enter" />
+                  <button class="btn btn-outline" id="addSubjectBtn" type="button">Add</button>
+                </div>
+              </div>
+
+              <!-- random options -->
+              <div id="randomOpts">
+                <div class="field">
+                  <label style="display:flex;align-items:center;gap:8px;font-weight:500">
+                    <input type="checkbox" id="includeBreak" checked style="width:auto" />
+                    Insert a break / free slot automatically
+                  </label>
+                </div>
+              </div>
+
+              <button class="btn btn-block" id="generateBtn" type="button">Generate timetable</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: result -->
+          <div id="result" class="hidden" style="margin-top: 28px">
+            <h2 style="color: var(--blue-900); font-size: 1.15rem; margin-bottom: 14px">3 · Your timetable</h2>
+            <div class="timetable-wrap">
+              <div id="timetableArea"></div>
+            </div>
+
+            <div class="export-bar">
+              <span class="label">Export as</span>
+              <button class="btn btn-outline btn-sm" data-export="csv"><i class="fas fa-file-csv"></i> CSV</button>
+              <button class="btn btn-outline btn-sm" data-export="excel"><i class="fas fa-file-excel"></i> Excel</button>
+              <button class="btn btn-outline btn-sm" data-export="pdf"><i class="fas fa-file-pdf"></i> PDF</button>
+              <button class="btn btn-outline btn-sm" data-export="png"><i class="fas fa-file-image"></i> PNG</button>
+              <button class="btn btn-outline btn-sm" data-export="jpeg"><i class="fas fa-file-image"></i> JPEG</button>
+              <button class="btn btn-ghost btn-sm" id="regenBtn" style="margin-left:auto"><i class="fas fa-sync-alt"></i> Regenerate</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <!-- ===================== HISTORY VIEW ===================== -->
+    <section class="view" id="view-history">
+      <main class="page">
+        <div class="page-head">
+          <div class="container">
+            <h1>History &amp; Downloads</h1>
+            <p>Every timetable you create is saved here, along with what you exported.</p>
+          </div>
+        </div>
+
+        <div class="container" style="padding-top: 28px; padding-bottom: 56px">
+          <div class="grid stats-grid" id="statsRow"></div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;margin:26px 0 14px;flex-wrap:wrap;gap:12px">
+            <h2 style="color: var(--blue-900); font-size: 1.15rem">Your timetables</h2>
+            <button class="btn btn-sm" data-nav="create">+ New timetable</button>
+          </div>
+
+          <div id="historyList"></div>
+
+          <div id="emptyState" class="empty hidden">
+            <div class="icon"><i class="fas fa-calendar-alt"></i></div>
+            <h3>No timetables yet</h3>
+            <p>Once you generate a timetable it will appear here with its downloads.</p>
+            <button class="btn" data-nav="create">Create your first timetable</button>
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <!-- ===================== Footer ===================== -->
+    <footer class="footer">
+      <div class="container">
+        <span>© <span id="year"></span> ScheduleCraft — Built with HTML, CSS &amp; JavaScript.</span>
+        <span>A 1st year BTEC CSE student project.</span>
+      </div>
+    </footer>
+
+    <!-- ===================== Auth Modal ===================== -->
+    <div class="modal-overlay hidden" id="authModal">
+      <div class="modal">
+        <button class="modal-close" id="authClose" aria-label="Close">&times;</button>
+        <h3>Welcome to ScheduleCraft</h3>
+        <p class="muted">Login or create an account to start building timetables.</p>
+
+        <div class="tabs">
+          <div class="tab active" id="tabLogin">Login</div>
+          <div class="tab" id="tabSignup">Sign up</div>
+        </div>
+
+        <div class="form-error hidden" id="authError"></div>
+
+        <!-- login -->
+        <form id="loginForm">
+          <div class="field">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" />
+          </div>
+          <button type="submit" class="btn btn-block">Login</button>
+          <p class="modal-foot">New here? <a href="#" id="toSignup">Create an account</a></p>
+        </form>
+
+        <!-- signup -->
+        <form id="signupForm" class="hidden">
+          <div class="field">
+            <label for="signupName">Full name</label>
+            <input type="text" id="signupName" placeholder="Your name" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="signupEmail">Email</label>
+            <input type="email" id="signupEmail" placeholder="you@example.com" autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" placeholder="At least 4 characters" autocomplete="new-password" />
+          </div>
+          <button type="submit" class="btn btn-block">Create account</button>
+          <p class="modal-foot">Already have an account? <a href="#" id="toLogin">Login</a></p>
+        </form>
+      </div>
+    </div>
+
+    <!-- ===================== Preview Modal (history) ===================== -->
+    <div class="modal-overlay hidden" id="previewModal">
+      <div class="modal modal-lg">
+        <button class="modal-close" id="previewClose" aria-label="Close">&times;</button>
+        <h3 id="previewTitle">Timetable</h3>
+        <p class="muted" id="previewMeta"></p>
+        <div class="timetable-wrap" style="margin-top: 14px">
+          <div id="previewArea"></div>
+        </div>
+        <div class="export-bar" style="margin-top: 16px">
+          <span class="label">Re-export as</span>
+          <button class="btn btn-outline btn-sm" data-pexport="csv"><i class="fas fa-file-csv"></i> CSV</button>
+          <button class="btn btn-outline btn-sm" data-pexport="excel"><i class="fas fa-file-excel"></i> Excel</button>
+          <button class="btn btn-outline btn-sm" data-pexport="pdf"><i class="fas fa-file-pdf"></i> PDF</button>
+          <button class="btn btn-outline btn-sm" data-pexport="png"><i class="fas fa-file-image"></i> PNG</button>
+          <button class="btn btn-outline btn-sm" data-pexport="jpeg"><i class="fas fa-file-image"></i> JPEG</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
