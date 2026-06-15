@@ -7,8 +7,7 @@ Built entirely using **HTML, CSS, and JavaScript**, the application provides an 
 ## 🌐 Live Demo
 
 🚀 **Try ScheduleCraft Here:**  
-[https://anujprajapati-code.github.io/ScheduleCraft/](https://anujprajapati-code.github.io/ScheduleCraft/)
-
+https://riiyachoudhary9.github.io/Schedule-craft/
 ## 🚀 Features
 
 ### 🔐 User Authentication
